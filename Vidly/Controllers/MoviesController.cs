@@ -15,11 +15,43 @@ namespace Vidly.Controllers
         {
             var movie = new Movie() { Name = "Glory road." };
 
-            return View(movie);
-            //return Content("Hola Mundo");
-            //return HttpNotFound();
-            //return new EmptyResult();
-            //return RedirectToAction("Index", "Home", new { page = 1, sortBy = "name" });
+            /*Returning data to the view 
+             * 1. ViewData["Movie"] = movie;
+                  return View();
+                  En éste ejemplo, en la vista se tiene que 
+                  hacer un cast al objeto del modelo, porque 
+                  todos los objetos del ViewData, son del tipo
+                  objeto. Además, la palabra: "Movie" está hardcodeada
+                  en la llave del diccionario.
+
+             * 2. ViewBag.Movie = movie;
+                  return View();
+                  En éste ejemplo se utiliza la propiedad variable,
+                  ViewBag, pero si el nombre de la propiedad cambia,
+                  también se tiene que cambiar en la vista y se tiene
+                  que hacer el cast.
+
+              * 3. return View(movie);
+              *   Es la forma más sencilla de trabajar con los modelos.
+                  Con éste método, lo que pasa internamente es 
+                  lo siguiente:
+                  var viewResult = new ViewResult();
+                  viewResult.ViewData.Model = movie;
+              
+
+
+             */
+
+            ViewData["Movie"] = movie;
+            ViewBag.Movie = movie;
+            return View();
+
+            /*Return diferents views
+            return Content("Hola Mundo");
+            return HttpNotFound();
+            return new EmptyResult();
+            return RedirectToAction("Index", "Home", new { page = 1, sortBy = "name" });
+            */
         }
 
         public ActionResult Edit(int id)
