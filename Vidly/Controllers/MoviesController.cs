@@ -39,7 +39,22 @@ namespace Vidly.Controllers
                 sortBy));
         }
 
-        public ActionResult ByReleaseDate(int year, int month)
+        /*
+         Ejemplo cuando no se especifica el mapeo del router.
+        public ActionResult ByReleaseYear(int year, int month)
+        {
+            return Content(year + "/" + month);
+        }
+
+        */
+
+        /// <summary>Routed map.</summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        /// <remarks>For more information, google: "ASP.NET MVC Attribute Route Constraints."</remarks>
+        [Route("movies/released/{year}/{month:regex(\\d{4}):range(1,12)}")]
+        public ActionResult ByReleaseYear(int year, int month)
         {
             return Content(year + "/" + month);
         }
